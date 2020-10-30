@@ -184,7 +184,7 @@ print(paste("data comes from", length(GPLs), "platform(s)"))
 
 if(length(GSEs) > 1 & length(GPLs) > 1) {
   design.mat = model.matrix(~0 + f + series_id + gpl, meta)
-  print("removing batch effects caused by GSE and GPL")
+  print("removing batch effects caused by GSE and platform")
   
   } else if (length(GSEs) > 1 & length(GPLs) == 1) {
     design.mat = model.matrix(~0 + f + series_id, meta)
@@ -192,12 +192,12 @@ if(length(GSEs) > 1 & length(GPLs) > 1) {
     
     } else if (length(GSEs) == 1 & length(GPLs) > 1) {
 
-      print("removing batch effect caused by GPL")
+      print("removing batch effect caused by platform")
       design.mat = stats::model.matrix(~0 + f + gpl, meta)
       
      } else {
         design.mat = model.matrix(~0 + f, meta)
-        print("no batch effect caused by GSE or GPL")
+        print("no batch effect caused by GSE or platform")
         }
 
 colnames(design.mat)[1:length(Conditions)] = Conditions
@@ -239,6 +239,9 @@ if(length(compare) > 1) {
 
 write.csv(mean_exp, file = paste0(dir.name,"/", prefix, "_de_anaylsis.csv"))
 print(paste0(prefix, "_de_anaylsis.csv saved"))
+
+toc <- as.integer(as.POSIXct( Sys.time() ))
+print(paste('The time it took in minutes to run the script was',(toc-tic)/60,sep=" "))
 
 
 
