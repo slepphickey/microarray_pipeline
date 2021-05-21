@@ -48,7 +48,7 @@ if(!dir.exists(dir.name)) {
 meta = read.csv(args[3])
 BAtoGPL = read.csv(args[4])
 
-if (length(args < 5)) {
+if (length(args) < 5) {
   Conditions = unique(meta$Condition)
 } else {
   cond = unlist(str_split(args[5], ", "))
