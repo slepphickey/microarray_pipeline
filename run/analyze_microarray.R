@@ -160,9 +160,9 @@ if(length(GPLs) > 1){
   finalDF$SYMBOL = NULL
   
   } else {
-    dataRMA = dataRMA[[1]]
     rmaDF = exprs(dataRMA)
     gene_ids = fData(dataRMA)
+    rownames(rmaDF) = gene_ids$SYMBOL
     rmaDF = rmaDF[!is.na(rownames(rmaDF)),]
     finalDF = as.data.frame(rmaDF)
 }
@@ -237,7 +237,7 @@ if(length(compare) > 1) {
     results$qval = qvalue(results[,2])$qvalues
 }
 
-write.csv(mean_exp, file = paste0(dir.name,"/", prefix, "_de_anaylsis.csv"))
+write.csv(results, file = paste0(dir.name,"/", prefix, "_de_anaylsis.csv"))
 print(paste0(prefix, "_de_anaylsis.csv saved"))
 
 toc <- as.integer(as.POSIXct( Sys.time() ))
