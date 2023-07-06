@@ -16,7 +16,7 @@ db_filename <- paste(args[1], "/", gooddate,"_GEOmetadb",".sqlite.gz",sep='')
 # make a directory that will eventually store the downloaded gms files
 
 if(!file.exists(db_filename)) {
-	getSQLiteFile(destfile = db_filename)
+  download.file('https://gbnci.cancer.gov/geo/GEOmetadb.sqlite.gz', db_filename)
 } else {
 	print('The file already exists')
 }
